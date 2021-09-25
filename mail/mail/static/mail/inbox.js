@@ -48,7 +48,7 @@ function sendmail(){
 
 
 function view_email(){
-  load_mailbox('inbox');
+  //load_mailbox('inbox');
   fetch('/emails/inbox')
   .then(response => response.json())
   .then(emails => {
