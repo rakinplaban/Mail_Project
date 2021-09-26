@@ -5,10 +5,11 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelector('#sent').addEventListener('click', () => load_mailbox('sent'));
   document.querySelector('#archived').addEventListener('click', () => load_mailbox('archive'));
   document.querySelector('#compose').addEventListener('click', compose_email);
-  document.querySelector('#compose-form').onsubmit = sendmail()
+  document.querySelector('#compose-form').onsubmit = sendmail();
 
   // By default, load the inbox
   load_mailbox('inbox');
+  
 });
 
 function compose_email() {
