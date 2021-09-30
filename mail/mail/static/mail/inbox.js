@@ -56,6 +56,7 @@ function load_mailbox(mailbox) {
 
   // Show the mailbox name
   document.querySelector('#emails-view').innerHTML = `<h3>${mailbox.charAt(0).toUpperCase() + mailbox.slice(1)}</h3>`;
+  localStorage.clear();
   fetch(`/emails/${mailbox}`)
   .then(response => response.json())
   .then(emails => {
@@ -64,15 +65,21 @@ function load_mailbox(mailbox) {
     emails.forEach(email => display_mailbox(email,mailbox));
   });
   //display_mailbox(emails, mailbox);
+  
 }
 
 
 function display_mailbox(email,mailbox){
   const emaildisplay = document.createElement('div');
-  emaildisplay.id = 'emaildisplay';
+  emaildisplay.setAttribute('id','emaildisplay');
+  const id = document.createElement('div');
+  id.setAttribute('id','id');
+  id.innerHTML = email.id;
+  emaildisplay.append(id);
   const recipients = document.createElement('div');
-  recipients.id = 'recipient'
-  if(mailbox==='sent'){
+  recipients.setAttribute('id','recipients');
+  console.log(`Mailbox : ${mailbox}`);
+  if(mailbox === "sent"){
     recipients.innerHTML = email.recipients[0];
   }
   else{
@@ -81,7 +88,69 @@ function display_mailbox(email,mailbox){
   emaildisplay.append(recipients);
 
   const subject = document.createElement('div');
-  subject.id = 'subject';
+  subject.setAttribute('id','subject');
   subject.innerHTML = email.subject;
   emaildisplay.append(subject);
+
+  const timestamp = document.createElement('div');
+  timestamp.setAttribute('id','timestamp');
+  timestamp.innerHTML = email.timestamp;
+  emaildisplay.append(timestamp);
+
+  if(mailbox === "inbox"){
+    const archive = document.createElement('div');
+    archive.setAttribute('id','archive');
+    const archivebtn = document.createElement('button');
+    archivebtn.setAttribute('id','archivebtn');
+    archivebtn.className = "btn btn-danger"
+    archivebtn.innerHTML = `Archive`;
+    archive.append(archivebtn);
+    emaildisplay.append(archive);
+   document.addEventListener('click', function() {
+      send_archive(email.id, email.archived)
+    });
+  }
+
+  if(mailbox === "archive"){
+    const archive = document.createElement('div');
+    archive.setAttribute('id','archive');
+    const archivebtn = document.createElement('button');
+    archivebtn.setAttribute('id','archivebtn');
+    archivebtn.className = "btn btn-warning"
+    archivebtn.innerHTML = `Unarchive`;
+    archive.append(archivebtn);
+    emaildisplay.append(archive);
+   document.addEventListener('click', function() {
+      back_unarchive(email.id, email.archived)
+    });
+  }
+  
+  //document.addEventListener('click')
+  document.body.appendChild(emaildisplay);
+}
+
+function send_archive(email,archived){
+  var archive_status = !archived;
+ 
+  fetch(`/emails/${email}`, {
+    method: 'PUT',
+    body: JSON.stringify({
+        archived: archive_status
+    })
+  })
+  load_mailbox('archive');
+  console.log(`${email} has status ${archive_status}`);
+}
+
+function back_unarchive(email,archived){
+  var archive_status = !archived;
+ 
+  fetch(`/emails/${email}`, {
+    method: 'PUT',
+    body: JSON.stringify({
+        archived: archive_status
+    })
+  })
+  load_mailbox('inbox');
+  console.log(`${email} has status ${archive_status}`);
 }

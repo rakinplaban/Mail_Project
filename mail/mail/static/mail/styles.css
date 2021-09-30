@@ -3,5 +3,34 @@ textarea {
 }
 
 #emaildisplay{
-    background-color: aqua;
+    background-color: rgb(212, 233, 233);
+    margin: 2px 200px 2px 200px;
+}
+
+#id{
+    margin: 5px 5px 5px 5px;
+    padding: 20px 20px 20px 20px;
+    display: inline;
+}
+#recipients{
+    margin: 5px 5px 5px 5px;
+    padding: 20px 20px 20px 20px;
+    display: inline;
+}
+#subject{
+    margin: 5px 5px 5px 5px;
+    padding: 20px 20px 20px 20px;
+    display: inline;
+}
+#timestamp{
+    margin: 5px 5px 5px 5px;
+    padding: 20px 20px 20px 20px;
+    display: inline;
+}
+
+#archive{
+    margin: 5px 5px 5px 5px;
+    padding: 20px 20px 20px 20px;
+    display: inline;
+    align-items: right;
 }
