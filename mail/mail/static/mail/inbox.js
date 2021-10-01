@@ -73,6 +73,7 @@ function load_mailbox(mailbox) {
 function display_mailbox(email,mailbox){
   const emaildisplay = document.createElement('div');
   emaildisplay.setAttribute('id','emaildisplay');
+  //emaildisplay.className = "border border-dark";
   const id = document.createElement('div');
   id.setAttribute('id','id');
   id.innerHTML = email.id;
@@ -125,7 +126,13 @@ function display_mailbox(email,mailbox){
       back_unarchive(email.id, email.archived)
     };
   }
-  
+  if(email.read === false){
+    emaildisplay.className = "bg bg-white border border-dark";
+  }
+  else{
+    //document.querySelector('#emaildisplay').style.color = rgb(128,128,128);
+    emaildisplay.className = "bg bg-secondary border border-dark text text-white";
+  }
   //document.addEventListener('click')
   document.body.appendChild(emaildisplay);
 }
