@@ -134,7 +134,8 @@ function display_mailbox(email,mailbox){
     emaildisplay.className = "bg bg-secondary border border-dark text text-white";
   }
   //document.addEventListener('click')
-  document.body.appendChild(emaildisplay);
+  //document.body.appendChild(emaildisplay);
+  document.querySelector('#emails-view').append(emaildisplay);
 }
 
 function send_archive(email,archived){
