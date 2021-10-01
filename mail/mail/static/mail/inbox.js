@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelector('#compose-form').onsubmit = sendmail;
 
   // By default, load the inbox
-  //load_mailbox('inbox');
+  load_mailbox('inbox');
   
 });
 
@@ -43,6 +43,7 @@ function sendmail(){
       console.log(result);
   });
   localStorage.clear();
+  location.reload();
   load_mailbox('sent');
   return false;
 }
@@ -106,23 +107,23 @@ function display_mailbox(email,mailbox){
     archivebtn.innerHTML = `Archive`;
     archive.append(archivebtn);
     emaildisplay.append(archive);
-   document.addEventListener('click', function() {
+    archivebtn.onclick = function() {
       send_archive(email.id, email.archived)
-    });
+    };
   }
 
   if(mailbox === "archive"){
     const archive = document.createElement('div');
     archive.setAttribute('id','archive');
-    const archivebtn = document.createElement('button');
-    archivebtn.setAttribute('id','archivebtn');
-    archivebtn.className = "btn btn-warning"
-    archivebtn.innerHTML = `Unarchive`;
-    archive.append(archivebtn);
+    const unarchivebtn = document.createElement('button');
+    unarchivebtn.setAttribute('id','unarchivebtn');
+    unarchivebtn.className = "btn btn-warning"
+    unarchivebtn.innerHTML = `Unarchive`;
+    archive.append(unarchivebtn);
     emaildisplay.append(archive);
-   document.addEventListener('click', function() {
+    unarchivebtn.onclick = function() {
       back_unarchive(email.id, email.archived)
-    });
+    };
   }
   
   //document.addEventListener('click')
@@ -138,8 +139,10 @@ function send_archive(email,archived){
         archived: archive_status
     })
   })
+  //load_mailbox('archive');
+  //console.log(`${email} has status ${archive_status}`);
+  window.location.reload();
   load_mailbox('archive');
-  console.log(`${email} has status ${archive_status}`);
 }
 
 function back_unarchive(email,archived){
@@ -151,6 +154,8 @@ function back_unarchive(email,archived){
         archived: archive_status
     })
   })
+  //load_mailbox('inbox');
+  //console.log(`${email} has status ${archive_status}`);
+  window.location.reload();
   load_mailbox('inbox');
-  console.log(`${email} has status ${archive_status}`);
 }
