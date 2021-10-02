@@ -196,35 +196,38 @@ function show_mail(email){
   id.innerHTML = email.id;
   emaildetails.append(id);
   
-  const sender = document.createElement('div');
-  sender.setAttribute('id','sender');
-  sender.className = "bg bg-light";
+  const senderh5 = document.createElement('h5');
+  senderh5.setAttribute('id','senderh5');
   console.log(email.sender);
-  sender.innerHTML = email.sender;
-  emaildetails.append(sender);
+  senderh5.innerHTML = `Sender: ${email.sender}`;
+  emaildetails.append(senderh5);
 
-  const recipients = document.createElement('div');
-  recipients.setAttribute('id','recipients');
+  const recipientsh5 = document.createElement('h5');
+  recipientsh5.setAttribute('id','recipientsh5');
   console.log(email.recipients[0]);
-  recipients.innerHTML = email.recipients[0];
-  emaildetails.append(recipients);
+  recipientsh5.innerHTML = `Recipient: ${email.recipients[0]}`;
+  emaildetails.append(recipientsh5);
 
-  const subject = document.createElement('h1');
-  subject.setAttribute('id','subject');
-  subject.innerHTML = email.subject;
-  emaildetails.append(subject);
+  const subjecth1 = document.createElement('h5');
+  subjecth1.setAttribute('id','subjecth1');
+  subjecth1.innerHTML = `Subject: ${email.subject}`;
+  emaildetails.append(subjecth1);
 
-  const timestamp = document.createElement('h5');
-  timestamp.setAttribute('id','timestamp');
-  timestamp.innerHTML = email.timestamp;
-  emaildetails.append(timestamp);
+  const timestamph5 = document.createElement('h5');
+  timestamph5.setAttribute('id','timestamph5');
+  timestamph5.innerHTML = `Timestamp: ${email.timestamp}`;
+  emaildetails.append(timestamph5);
 
-  
+  const replybtn = document.createElement('button');
+  replybtn.className = 'btn btn-primary';
+  replybtn.innerHTML = 'Reply';
+  emaildetails.append(replybtn);
 
-  const body = document.createElement('div');
-  body.setAttribute('id','body');
-  body.innerHTML = email.body;
-  emaildetails.append(body);
+  const emailbody = document.createElement('div');
+  emailbody.setAttribute('id','emailbody');
+  emailbody.className = "bg bg-light";
+  emailbody.innerHTML = email.body;
+  emaildetails.append(emailbody);
 
   document.body.append(emaildetails);
 }

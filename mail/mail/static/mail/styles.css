@@ -34,3 +34,11 @@ textarea {
     display: inline;
     align-items: right;
 }
+
+#email-details{
+    margin: 2px 200px 2px 200px;
+}
+
+#emailbody{
+    margin-top: 10px;
+}
