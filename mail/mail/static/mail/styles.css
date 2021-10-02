@@ -6,7 +6,11 @@ textarea {
     /*background-color: rgb(212, 233, 233);*/
     margin: 2px 2px 2px 2px;
 }
-
+#emaildisplaydet{
+    /*background-color: rgb(212, 233, 233);*/
+    margin-right: 200px;
+    display: inline;
+}
 #id{
     /*margin: 5px 5px 5px 5px;
     padding: 20px 20px 20px 20px;*/

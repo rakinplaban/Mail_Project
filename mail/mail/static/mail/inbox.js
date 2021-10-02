@@ -190,44 +190,78 @@ function show_mail(email){
   document.querySelector('#compose-view').style.display = 'none';
   //document.querySelector('#email-details').style.display = 'block';
 
+  const description = document.createElement('div');
+  description.setAttribute('id','description');
+
   const id = document.createElement('div');
   id.setAttribute('id','id');
   console.log(email.id);
   id.innerHTML = email.id;
-  emaildetails.append(id);
+  description.append(id);
   
   const senderh5 = document.createElement('h5');
   senderh5.setAttribute('id','senderh5');
   console.log(email.sender);
   senderh5.innerHTML = `Sender: ${email.sender}`;
-  emaildetails.append(senderh5);
+  description.append(senderh5);
 
   const recipientsh5 = document.createElement('h5');
   recipientsh5.setAttribute('id','recipientsh5');
   console.log(email.recipients[0]);
   recipientsh5.innerHTML = `Recipient: ${email.recipients[0]}`;
-  emaildetails.append(recipientsh5);
+  description.append(recipientsh5);
 
   const subjecth1 = document.createElement('h5');
   subjecth1.setAttribute('id','subjecth1');
   subjecth1.innerHTML = `Subject: ${email.subject}`;
-  emaildetails.append(subjecth1);
+  description.append(subjecth1);
 
   const timestamph5 = document.createElement('h5');
   timestamph5.setAttribute('id','timestamph5');
   timestamph5.innerHTML = `Timestamp: ${email.timestamp}`;
-  emaildetails.append(timestamph5);
+  description.append(timestamph5);
 
   const replybtn = document.createElement('button');
+  replybtn.setAttribute('id','replybtn');
   replybtn.className = 'btn btn-primary';
   replybtn.innerHTML = 'Reply';
-  emaildetails.append(replybtn);
+  description.append(replybtn);
+  replybtn.onclick = function(){
+    reply_email(email);
+    document.querySelector('#email-details').style.display = 'none';
+  }
+  /*if(document.querySelector('#replybtn') !==null)
+    document.querySelector('#replybtn').onclick = compose_email;
+  */
 
   const emailbody = document.createElement('div');
   emailbody.setAttribute('id','emailbody');
   emailbody.className = "bg bg-light";
   emailbody.innerHTML = email.body;
-  emaildetails.append(emailbody);
+  description.append(emailbody);
 
+  if(email.read === false){
+    email.read = true;
+  }
+  emaildetails.append(description);
   document.body.append(emaildetails);
+}
+
+function reply_email(email) {
+  const emailid = document.createElement('div');
+  emailid.setAttribute('id','emailid');
+  emailid.innerHTML = email.id;
+  emailid.style.display = 'none';
+  // Show compose view and hide other views
+  document.querySelector('#emails-view').style.display = 'none';
+  document.querySelector('#compose-view').style.display = 'block';
+  //document.querySelector('#email-details').style.display = 'none';
+  if(document.querySelector('#email-details') !== null){
+    document.querySelector('#email-details').style.display = 'none';
+  }
+
+  // Clear out composition fields
+  document.querySelector('#compose-recipients').value = email.sender;
+  document.querySelector('#compose-subject').value = `Re: ${email.subject}`;
+  document.querySelector('#compose-body').value = `On ${email.timestamp} ${email.sender} wrote: ${email.body}`;
 }
