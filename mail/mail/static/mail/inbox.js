@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
-  /*const emaildetails = document.createElement('div');
+  const emaildetails = document.createElement('div');
   emaildetails.setAttribute('id','email-details');
-  document.body.append(emaildetails);*/
+  document.querySelector('.container').append(emaildetails);
   // Use buttons to toggle between views
   document.querySelector('#inbox').addEventListener('click', () => load_mailbox('inbox'));
   document.querySelector('#sent').addEventListener('click', () => load_mailbox('sent'));
@@ -183,12 +183,9 @@ function back_unarchive(email,archived){
 }
 
 function show_mail(email){
-  const emaildetails = document.createElement('div');
-  emaildetails.setAttribute('id','email-details');
-
   document.querySelector('#emails-view').style.display = 'none';
   document.querySelector('#compose-view').style.display = 'none';
-  //document.querySelector('#email-details').style.display = 'block';
+  document.querySelector('#email-details').style.display = 'block';
 
   const description = document.createElement('div');
   description.setAttribute('id','description');
@@ -243,8 +240,8 @@ function show_mail(email){
   if(email.read === false){
     email.read = true;
   }
-  emaildetails.append(description);
-  document.body.append(emaildetails);
+  document.querySelector('#email-details').append(description);
+  //document.body.append(emaildetails);
 }
 
 function reply_email(email) {
