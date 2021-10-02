@@ -187,8 +187,7 @@ function show_mail(email){
   document.querySelector('#compose-view').style.display = 'none';
   document.querySelector('#email-details').style.display = 'block';
 
-  const description = document.createElement('div');
-  description.setAttribute('id','description');
+  const description = document.querySelector('#email-details');
 
   const id = document.createElement('div');
   id.setAttribute('id','id');
@@ -240,7 +239,7 @@ function show_mail(email){
   if(email.read === false){
     email.read = true;
   }
-  document.querySelector('#email-details').append(description);
+  //document.querySelector('#email-details').append(description);
   //document.body.append(emaildetails);
 }
 
