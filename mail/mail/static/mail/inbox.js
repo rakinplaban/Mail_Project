@@ -211,11 +211,11 @@ function show_mail(email){
 
   const description = document.querySelector('#email-details');
 
-  const id = document.createElement('div');
+  /*const id = document.createElement('div');
   id.setAttribute('id','id');
   console.log(email.id);
   id.innerHTML = email.id;
-  description.append(id);
+  description.append(id);*/
   
   const senderh5 = document.createElement('h5');
   senderh5.setAttribute('id','senderh5');
@@ -257,6 +257,8 @@ function show_mail(email){
   emailbody.className = "bg bg-light";
   emailbody.innerHTML = email.body;
   description.append(emailbody);
+
+  return false;
 
   /*if(email.read === false){
     email.read = true;
