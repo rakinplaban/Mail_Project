@@ -258,7 +258,19 @@ function show_mail(email){
   emailbody.innerHTML = email.body;
   description.append(emailbody);
 
-  return false;
+  document.querySelector('#inbox').addEventListener('click', () => {
+    location.reload();
+    load_mailbox('inbox');
+  });
+  document.querySelector('#sent').addEventListener('click', () => { 
+    location.reload()
+    load_mailbox('sent')});
+  document.querySelector('#archived').addEventListener('click', () => { 
+    location.reload()
+    load_mailbox('archive')});
+  document.querySelector('#compose').addEventListener('click', () =>{ compose_email()
+  location.reload();
+  });
 
   /*if(email.read === false){
     email.read = true;
