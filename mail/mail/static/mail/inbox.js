@@ -207,7 +207,6 @@ function show_mail(email){
       // Print email
       console.log(email);
       // ... do something else with email ...
-      email.read = true;
   });
 
   const description = document.querySelector('#email-details');
