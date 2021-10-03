@@ -85,7 +85,8 @@ function display_mailbox(email,mailbox){
   emaildisplay.setAttribute('id','emaildisplay');
 
   const emaildisplaydet = document.createElement('div');
-  emaildisplaydet.setAttribute('id','emaildisplaydet');
+  emaildisplaydet.setAttribute('id',`${email.id}`);
+  emaildisplaydet.className = 'rina';
   //emaildisplay.className = "border border-dark";
   const id = document.createElement('div');
   id.setAttribute('id','id');
@@ -140,7 +141,7 @@ function display_mailbox(email,mailbox){
     };
   }
   if(email.read === false){
-    emaildisplay.className = "bg bg-white border border-dark";
+    emaildisplay.className = "bg bg-whilte border border-dark";
   }
   else{
     //document.querySelector('#emaildisplay').style.color = rgb(128,128,128);
@@ -149,7 +150,11 @@ function display_mailbox(email,mailbox){
   //document.addEventListener('click')
   //document.body.appendChild(emaildisplay);
   document.querySelector('#emails-view').append(emaildisplay);
-  document.querySelector('#emaildisplaydet').addEventListener('click', () => show_mail(email));
+  emaildisplaydet.addEventListener('click', () =>{
+    reading_status(email.id);
+    emaildisplay.className = "bg bg-secondary border border-dark text text-white";
+    show_mail(email);
+  });
 }
 
 function send_archive(email,archived){
@@ -182,10 +187,28 @@ function back_unarchive(email,archived){
   load_mailbox('inbox');
 }
 
+function reading_status(email){
+  fetch(`/emails/${email}`, {
+    method: 'PUT',
+    body: JSON.stringify({
+        read: true
+    })
+  })
+}
+
 function show_mail(email){
   document.querySelector('#emails-view').style.display = 'none';
   document.querySelector('#compose-view').style.display = 'none';
   document.querySelector('#email-details').style.display = 'block';
+
+  fetch(`/emails/${email.id}`)
+  .then(response => response.json())
+  .then(email => {
+      // Print email
+      console.log(email);
+      // ... do something else with email ...
+      email.read = true;
+  });
 
   const description = document.querySelector('#email-details');
 
@@ -236,11 +259,13 @@ function show_mail(email){
   emailbody.innerHTML = email.body;
   description.append(emailbody);
 
-  if(email.read === false){
+  /*if(email.read === false){
     email.read = true;
-  }
+  }*/
+  //localStorage.clear();
   //document.querySelector('#email-details').append(description);
   //document.body.append(emaildetails);
+  
 }
 
 function reply_email(email) {
