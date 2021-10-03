@@ -296,6 +296,14 @@ function reply_email(email) {
 
   // Clear out composition fields
   document.querySelector('#compose-recipients').value = email.sender;
-  document.querySelector('#compose-subject').value = `Re: ${email.subject}`;
+  subjectofmail = `${email.subject}`;
+  re = 'Re: ';
+  if(email.subject.includes(re)){
+     document.querySelector('#compose-subject').value = email.subject;
+  }
+  else{
+     document.querySelector('#compose-subject').value = `Re: ${email.subject}`;
+  }
+  //document.querySelector('#compose-subject').value = `Re: ${email.subject}`;
   document.querySelector('#compose-body').value = `On ${email.timestamp} ${email.sender} wrote: ${email.body}`;
 }
