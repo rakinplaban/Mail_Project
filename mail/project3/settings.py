@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'project3.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',
+        'NAME': 'mail',
         'USER': 'postgres',
         'HOST': '127.0.0.1',
         'PORT': '5432',
@@ -90,6 +90,8 @@ DATABASES = {
 }
 
 AUTH_USER_MODEL = 'mail.User'
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
